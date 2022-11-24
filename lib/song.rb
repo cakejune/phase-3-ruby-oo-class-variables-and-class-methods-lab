@@ -1,0 +1,81 @@
+require "pry"
+
+class Song
+  @@count = 0
+  @@song_list = []
+  @@artists = []
+  @@genres = []
+
+  attr_accessor :name, :artist
+
+  def genre
+    @genre
+  end
+  def genre=(genre)
+    @genre = genre
+  end
+
+  def initialize(name, artist, genre)
+    @name = name
+    @artist = artist
+    @genre = genre
+    @@count += 1
+    @@artists << artist
+    @@genres << genre
+    @@song_list << { artist: artist, name: name, genre: genre }
+  end
+
+  def self.count
+    @@count
+  end
+
+  def self.artists
+    @@artists.uniq
+  end
+
+  def self.genres_all
+    @@genres
+  end
+
+  def self.genres
+    @@genres.uniq
+  end
+
+  def self.song_list
+    @@song_list
+  end
+
+  def self.genre_count
+    genre_count = {}
+    @@genres.each do |genre|
+      if genre_count[genre]
+        genre_count[genre] += 1
+      else
+        genre_count[genre] = 1
+      end
+    end
+    genre_count
+  end
+
+  def self.artist_count
+    artist_count = {}
+    @@artists.each do |artist|
+      if artist_count[artist]
+        artist_count[artist] += 1
+      else
+        artist_count[artist] = 1
+      end
+    end
+    artist_count
+  end
+end
+
+goldigger = Song.new("Gold Digger", "Kanye West", "Rap")
+misty = Song.new("Misty", "Erroll Garner", "Jazz")
+thrust = Song.new("Thrust", "Herbie Hancock", "Jazz")
+lose = Song.new("Lose Yourself", "Eminem", "Rap")
+lovemedo = Song.new("Love Me Do", "The Beatles", "Rock")
+episode = Song.new("The Next Episode", "Dr. Dre", "Rap")
+watermelon_man = Song.new("Watermelon Man", "Herbie Hancock", "Jazz")
+
+binding.pry
